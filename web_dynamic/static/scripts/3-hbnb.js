@@ -20,24 +20,6 @@ $('document').ready(function () {
     });
 });
 
-function getUsers() {
-    return new Promise(resolve => {
-        $.ajax({
-            url: 'http://0.0.0.0:5001/api/v1/users',
-            type: 'GET',
-            contentType: 'application/json',
-            dataType: 'json',
-            success: function(data) {
-                resolve(data)
-            }
-        })
-    })
-}
-
-async function asyncUser(){
-    let users = await getUsers();
-    return(users)
-}
 
 const places_search = `http://0.0.0.0:5001/api/v1/places_search/`
 $.ajax({
@@ -47,8 +29,6 @@ $.ajax({
     dataType: 'json',
     data: '{}',
     success: function (data) {
-        let users = asyncUser()
-        console.log(users)
         for (let i of data) {
             let places = [
                 `<article>`,
@@ -61,11 +41,8 @@ $.ajax({
                 `<div class="number_rooms">${ i.number_rooms } Bedrooms</div>`,
                 `<div class="number_bathrooms">${ i.number_bathrooms } Bathrooms</div>`,
                 `</div>`,
-                `<div class="user">`,
-                `<b>Owner:</b> ${ i.user.first_name } ${ i.user.last_name }`,
-                `</div>`,
                 `<div class="description">`,
-                `${ i.description | safe }`,
+                `${ i.description }`,
                 `</div>`,
                 ` </article>`];
             $('.places').append(places.join(''));
