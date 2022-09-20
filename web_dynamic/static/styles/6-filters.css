@@ -103,6 +103,7 @@ button:hover {
 }
 
 .amenities:hover .popover,
-.locations:hover .popover {
+.locations:hover .popover,
+.popover:hover {
     visibility: visible;
 }
